@@ -114,7 +114,11 @@ public class Game
             case GO:
                 goRoom(command);
                 break;
-
+                
+            case LOOK:
+                look();
+                break;
+               
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -123,7 +127,7 @@ public class Game
     }
 
     // implementations of user commands:
-
+    
     /**
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
@@ -163,7 +167,15 @@ public class Game
             System.out.println(currentRoom.getLongDescription());
         }
     }
-
+    
+    /**
+     * This is a command to look at the room.
+     */
+    private void look()
+    {
+       System.out.println(currentRoom.getLongDescription());
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
