@@ -34,29 +34,27 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office, checkpoint;
+        Room outside, lab, office, checkpoint, east_dormitory, west_dormitory, bath_wash_room, main_office, store, chapel, yard,
+        visitors_rooms, female_hospiral, male_hospital, cafeteria, kitchen, boiler_room;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the Bank");
-        checkpoint = new Room("in the security checkpoint, guards stare at you.");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
+        lab = new Room("in a lab full of empty cabinets");
+        outside = new Room("outside the main entrance of the Asylum");
+        east_dormitory = new Room("in the east dormitory");
+        west_dormitory = new Room("in the west dormitory");
+        bath_wash_room = new Room("in the bathroom");
+        checkpoint = new Room("in the security checkpoint");
         office = new Room("in the computing admin office");
         
         // initialise room exits
+        lab.setExit("west", east_dormitory);
+        lab.setExit("east", bath_wash_room);
+        
         outside.setExit("north", checkpoint);
         
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
         office.setExit("west", lab);
 
-        currentRoom = outside;  // start game outside
+        currentRoom = lab;  // start game outside
     }
 
     /**
@@ -83,8 +81,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the Bank Heist!");
-        System.out.println("No one has ever dared rob this bank but you! Time to be RICH!");
+        System.out.println("Welcome to the Abandoned Asylum!");
+        System.out.println("You have no memory or remember how you got here but you get the feeling you have to ESCAPE!");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -135,7 +133,7 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around at the room");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
