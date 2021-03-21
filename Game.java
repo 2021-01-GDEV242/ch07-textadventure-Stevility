@@ -34,20 +34,19 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, checkpoint;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
+        outside = new Room("outside the main entrance of the Bank");
+        checkpoint = new Room("in the security checkpoint, guards stare at you.");
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
         
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-
+        outside.setExit("north", checkpoint);
+        
         theater.setExit("west", outside);
 
         pub.setExit("east", outside);
@@ -84,8 +83,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to the Bank Heist!");
+        System.out.println("No one has ever dared rob this bank but you! Time to be RICH!");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
