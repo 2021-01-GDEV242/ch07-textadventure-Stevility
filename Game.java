@@ -74,7 +74,7 @@ public class Game
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
-
+    
     /**
      * Print out the opening message for the player.
      */
@@ -115,7 +115,11 @@ public class Game
             case LOOK:
                 look();
                 break;
-               
+            
+            /**case EAT:
+                eat();
+                break;
+             **/  
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -173,6 +177,13 @@ public class Game
        System.out.println(currentRoom.getLongDescription());
     }
     
+    /**
+     * This is a command to eat
+     * private void eat()
+    {
+       System.out.println("You have eaten now and you are not hungry any more.");
+    }
+    **/
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
