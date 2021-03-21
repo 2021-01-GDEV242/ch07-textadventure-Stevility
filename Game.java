@@ -1,4 +1,4 @@
-/**
+ /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
  *  can walk around some scenery. That's all. It should really be extended 
@@ -34,8 +34,8 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, lab, office, checkpoint, east_dormitory, west_dormitory, bath_wash_room, main_office, store, chapel, yard,
-        visitors_rooms, female_hospiral, male_hospital, cafeteria, kitchen, boiler_room;
+        Room outside, lab, office, checkpoint, east_dormitory, west_dormitory, bath_wash_room, store, chapel, yard,
+        visitors_rooms, female_hospital, male_hospital, cafeteria, kitchen, boiler_room;
       
         // create the rooms
         lab = new Room("in a lab full of empty cabinets");
@@ -43,6 +43,15 @@ public class Game
         east_dormitory = new Room("in the east dormitory");
         west_dormitory = new Room("in the west dormitory");
         bath_wash_room = new Room("in the bathroom");
+        store = new Room("in the Store Room full of rotten meat.");
+        chapel = new Room("in the Chapel. In the middle there is a bible");
+        yard = new Room("in the yard");
+        visitors_rooms = new Room("in the visitor's room");
+        female_hospital= new Room("in the female hospital yard");
+        male_hospital= new Room("in the male hospital yard");
+        cafeteria= new Room("in the cafeteria");
+        kitchen= new Room("in the kitchen");
+        boiler_room = new Room("in the boiler room");
         checkpoint = new Room("in the security checkpoint");
         office = new Room("in the computing admin office");
         
@@ -50,10 +59,52 @@ public class Game
         lab.setExit("west", east_dormitory);
         lab.setExit("east", bath_wash_room);
         
-        outside.setExit("north", checkpoint);
+        east_dormitory.setExit("north", visitors_rooms);
+        east_dormitory.setExit("west", west_dormitory);
         
-        office.setExit("west", lab);
-
+        west_dormitory.setExit("north", female_hospital);
+        west_dormitory.setExit("east", east_dormitory);
+        
+        female_hospital.setExit("north", male_hospital);
+        female_hospital.setExit("east", visitors_rooms);
+        female_hospital.setExit("south", west_dormitory);
+        
+        male_hospital.setExit("east", cafeteria);
+        male_hospital.setExit("south", female_hospital);
+        
+        visitors_rooms.setExit("north", cafeteria);
+        visitors_rooms.setExit("south", east_dormitory);
+        visitors_rooms.setExit("east", yard);
+        visitors_rooms.setExit("west", female_hospital);
+        
+        cafeteria.setExit("west", male_hospital);
+        cafeteria.setExit("south", visitors_rooms);
+        cafeteria.setExit("east", kitchen);
+        
+        yard.setExit("west", visitors_rooms);
+        yard.setExit("east", store);
+        
+        kitchen.setExit("west", cafeteria);
+        kitchen.setExit("south", store);
+        kitchen.setExit("east", boiler_room);
+        
+        store.setExit("north",kitchen);
+        store.setExit("east",chapel);
+        store.setExit("west",yard);
+        store.setExit("south",bath_wash_room);
+        
+        bath_wash_room.setExit("north",store);
+        bath_wash_room.setExit("east",office);
+        bath_wash_room.setExit("west",lab);
+        
+        chapel.setExit("west",store);
+        
+        boiler_room.setExit("west", kitchen);
+        
+        office.setExit("west", bath_wash_room);
+        
+        outside.setExit("north", checkpoint);
+               
         currentRoom = lab;  // start game outside
     }
 
