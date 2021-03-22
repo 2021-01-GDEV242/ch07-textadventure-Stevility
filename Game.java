@@ -1,4 +1,4 @@
- /**
+/**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
  *  can walk around some scenery. That's all. It should really be extended 
@@ -18,7 +18,7 @@
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Room currentRoom, prevRoom;
         
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +27,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        prevRoom = currentRoom;
     }
 
     /***
@@ -104,7 +105,11 @@ public class Game
         office.setExit("west", bath_wash_room);
         
         outside.setExit("north", checkpoint);
-               
+        
+        //items in the room
+        //office.setItem("key", "A misterious key but to what door does it open?");
+        
+        
         currentRoom = lab;  // start game outside
     }
 
@@ -137,6 +142,7 @@ public class Game
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
+        //System.out.println(player.getInventoryString());
     }
 
     /**
@@ -171,6 +177,10 @@ public class Game
                 eat();
                 break;
              **/  
+            case BACK:
+                goBack(command);
+                break;
+                
             case QUIT:
                 wantToQuit = quit(command);
                 break;
@@ -218,6 +228,20 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+    
+    /**
+     * Used to go back to the previous room.
+     */
+    private void goBack(Command command)
+    {
+        if(!prevRoom.equals(currentRoom))
+        {
+            currentRoom = prevRoom;
+            System.out.println(currentRoom.getLongDescription());
+        }
+        else
+            System.out.println("You cannot go back any farther.");
     }
     
     /**
