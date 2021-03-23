@@ -19,6 +19,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom, prevRoom;
+    private Item item;
+    private Timer timer;
         
     /**
      * Create the game and initialise its internal map.
@@ -28,6 +30,7 @@ public class Game
         createRooms();
         parser = new Parser();
         prevRoom = currentRoom;
+        timer = new Timer(600, -1, 5);
     }
 
     /***
@@ -106,10 +109,20 @@ public class Game
         
         outside.setExit("north", checkpoint);
         
-        //items in the room
-        //office.setItem("key", "A misterious key but to what door does it open?");
+        //Collectables
+        Item message_1, message_2, message_3, message_4, message_5, message_6, message_7, message_8, message_9, message_10;
         
-        
+        /**west_dormitory.add(message_1);
+        message_2 = new Item("Message 2");
+        message_3 = new Item("Message 3");
+        message_4 = new Item("Message 4");
+        message_5 = new Item("Message 5");
+        message_6 = new Item("Message 6");
+        message_7 = new Item("Message 7");
+        message_8 = new Item("Message 8");
+        message_9 = new Item("Message 9");
+        message_10 = new Item("Message 10");
+        **/
         currentRoom = lab;  // start game outside
     }
 
@@ -140,6 +153,7 @@ public class Game
         System.out.println("Welcome to the Abandoned Asylum!");
         System.out.println("You have no memory or remember how you got here but you get the feeling you have to ESCAPE!");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("You have "+timer+"s to win.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
         //System.out.println(player.getInventoryString());
@@ -153,16 +167,19 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
+        boolean updateTimer = true;
 
         CommandWord commandWord = command.getCommandWord();
 
         switch (commandWord) {
             case UNKNOWN:
                 System.out.println("I don't know what you mean...");
+                updateTimer = false;
                 break;
 
             case HELP:
                 printHelp();
+                updateTimer = false; 
                 break;
 
             case GO:
@@ -170,7 +187,7 @@ public class Game
                 break;
                 
             case LOOK:
-                look();
+                look(command);
                 break;
             
             /**case EAT:
@@ -183,7 +200,23 @@ public class Game
                 
             case QUIT:
                 wantToQuit = quit(command);
+                updateTimer = false;
                 break;
+            
+            case TIME:
+                System.out.println("You have "+timer+"s left...");
+                break;
+        }
+        //This will be used to notify the player.
+            if (updateTimer) {
+            timer.updateTimer();
+            if (timer.hasExpired()) {
+                System.out.println("Time's up - you lost!");
+                wantToQuit = true;
+            } else if (timer.isLow()) {
+                System.out.println("Time is running low!");
+                System.out.println("You have "+timer+"s left...");
+            }
         }
         return wantToQuit;
     }
@@ -237,6 +270,7 @@ public class Game
     {
         if(!prevRoom.equals(currentRoom))
         {
+            //go back to the previous room.
             currentRoom = prevRoom;
             System.out.println(currentRoom.getLongDescription());
         }
@@ -247,18 +281,33 @@ public class Game
     /**
      * This is a command to look at the room.
      */
-    private void look()
+    private void look(Command command)
     {
-       System.out.println(currentRoom.getLongDescription());
+        if(command.hasSecondWord()) 
+        {
+               System.out.println("You are looking at ");
+               return;
+        }
+            System.out.println(currentRoom.getLongDescription());
     }
     
     /**
-     * This is a command to eat
-     * private void eat()
+     * This is a command to eat. 
+     */
+    private void eat(Command command)
+
     {
-       System.out.println("You have eaten now and you are not hungry any more.");
+        if(command.hasSecondWord()) 
+
+        {
+
+            System.out.println("What would you like to eat?");
+              return ;
+
+        }
+            System.out.println("You have eaten now and you are not hungry anymore!");
     }
-    **/
+  
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
