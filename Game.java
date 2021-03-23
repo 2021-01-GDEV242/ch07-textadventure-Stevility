@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom, prevRoom;
-    private Item item;
+    private Item item1;
     private Timer timer;
         
     /**
@@ -109,20 +109,19 @@ public class Game
         
         outside.setExit("north", checkpoint);
         
-        //Collectables
-        Item message_1, message_2, message_3, message_4, message_5, message_6, message_7, message_8, message_9, message_10;
+        //Collectables        
         
-        /**west_dormitory.add(message_1);
-        message_2 = new Item("Message 2");
-        message_3 = new Item("Message 3");
-        message_4 = new Item("Message 4");
-        message_5 = new Item("Message 5");
-        message_6 = new Item("Message 6");
-        message_7 = new Item("Message 7");
-        message_8 = new Item("Message 8");
-        message_9 = new Item("Message 9");
-        message_10 = new Item("Message 10");
-        **/
+        Item message_1 = new Item("Message 1: There was no way out!");
+        Item message_2 = new Item("Message 2: END THE SUFFERING!");
+        Item message_3 = new Item("Message 3: WE ARE WATCHING YOU!");
+        Item message_4 = new Item("Message 4: Does pineapple go on pizza?");
+        Item message_5 = new Item("Message 5: TRAITOR!");
+        Item message_6 = new Item("Message 6: WhAt TiME Is tI?");
+        Item message_7 = new Item("Message 7: Appointment: 1:30 AM");
+        Item message_8 = new Item("Message 8: Everyone is dead!");
+        Item message_9 = new Item("Message 9: I MISS RICE!");
+        Item message_10 = new Item("Message 10: I wonder what its like.....");
+        
         currentRoom = lab;  // start game outside
     }
 
@@ -190,10 +189,10 @@ public class Game
                 look(command);
                 break;
             
-            /**case EAT:
-                eat();
+            case EAT:
+                eat(command);
                 break;
-             **/  
+              
             case BACK:
                 goBack(command);
                 break;

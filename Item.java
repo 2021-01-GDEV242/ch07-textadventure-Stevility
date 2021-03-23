@@ -1,6 +1,7 @@
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 /**
  * Class Item - a room in an adventure game.
@@ -18,24 +19,65 @@ import java.util.Iterator;
 
 public class Item 
 {
-    private int weight;
-    private String name;
-    private String Idescription;
- 
-    public Item(int weight, String name, String Idescription)
+    private String description;
+    private ArrayList<Item> list = null;
+
+  public void items() {
+    list = new ArrayList<Item>();
+  }
+
+  public void addItem(Item item) {
+     list.add(item);
+  }
+
+  // get methods
+
+    
+    /**
+     * USed to get the description of the item.
+     */
+    public Item(String description)
     {
-        this.weight = weight;
-        this.name = name;
-        this.Idescription = Idescription;
+        this.description = description;
     }
- 
-    public String getName()
+    
+    /**
+     * Return the description of the item.
+     */
+    public String getShortDescription()
     {
-        return name;
+        return description;
+    }    
+    
+    /**
+     * A long description of the item. (Will add just incase I want to add more details to the item.)
+     */
+    public String toString()
+    {
+        return "Collectable " + description;
     }
- 
-    public String getDescription()
+    
+    /**
+     * Used for adding an item to the room for when it is created.
+     */
+    public void addItem(String description,int weight)
     {
-        return Idescription;
+        list.add(new Item (description));
+    }
+    
+    /**
+     * This will allow me to get the item.
+     */
+    public ArrayList<Item> getItems()
+    {
+        return list;
+    }
+    
+    /**
+     * This will allow me to create a list of items.
+     */
+    public void add(Item sItem)
+    {
+        list.add(sItem);
     }
 }
