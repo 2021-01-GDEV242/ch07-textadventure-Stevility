@@ -17,67 +17,35 @@ import java.util.ArrayList;
  * @version 2016.02.29
  */
 
-public class Item 
-{
-    private String description;
-    private ArrayList<Item> list = null;
-
-  public void items() {
-    list = new ArrayList<Item>();
-  }
-
-  public void addItem(Item item) {
-     list.add(item);
-  }
-
-  // get methods
-
-    
+public class Item
+   {
+   private String description;
+   private String name;
+   private ArrayList<Item> items;   // stores Items
+ 
     /**
-     * USed to get the description of the item.
-     */
-    public Item(String description)
+    * Constructor for the Class Items
+    */
+    public Item(String description,int weight, String name)
     {
-        this.description = description;
-    }
-    
+    this.description = description;
+    this.name = name;
+    ArrayList items = new ArrayList (20);
+   }
+   
     /**
-     * Return the description of the item.
+     * Item description
      */
-    public String getShortDescription()
-    {
+   public String getDescription()
+   {
         return description;
-    }    
-    
+   }
+   
     /**
-     * A long description of the item. (Will add just incase I want to add more details to the item.)
+     * Returns the name of the items
      */
-    public String toString()
+    public String getName()
     {
-        return "Collectable " + description;
-    }
-    
-    /**
-     * Used for adding an item to the room for when it is created.
-     */
-    public void addItem(String description,int weight)
-    {
-        list.add(new Item (description));
-    }
-    
-    /**
-     * This will allow me to get the item.
-     */
-    public ArrayList<Item> getItems()
-    {
-        return list;
-    }
-    
-    /**
-     * This will allow me to create a list of items.
-     */
-    public void add(Item sItem)
-    {
-        list.add(sItem);
-    }
+        return name;
+    }  
 }
