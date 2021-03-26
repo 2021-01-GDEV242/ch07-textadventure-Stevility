@@ -65,7 +65,7 @@ public class Room
      */
     public String getLongDescription()
     {               
-        return "You are " + description + " OOH LOOK A NEW MESSAGE " + roomItem.getDescription() + " and a "+ roomMsg.getDescription() + ".\n" + getExitString();
+        return "You are " + description + " OOH LOOK A NEW MESSAGE " + roomItem.getDescription() + ".\n" + "and a "+ roomMsg.getDescription() + ".\n" + getExitString();
     }
     
     /**
